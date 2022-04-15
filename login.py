@@ -28,43 +28,33 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.button import Button
 from kivy.uix.label import Label
 import typing_extensions
+from kivymd.app import MDApp
+from kivy.lang import Builder
                              
 kivy.require('2.1.0')
 
 
 
-
-
-
-class loginscreen(GridLayout):
-    def __init__(self, **kwargs):
-        super(loginscreen, self).__init__(**kwargs)
-        self.cols = 2
-        self.add_widget(Label(text='User Name'))
-        self.username = TextInput(multiline=False)
-        self.add_widget(self.username)
-        self.add_widget(Label(text='Password'))
-        self.password = TextInput(password=True, multiline=False)
-        self.add_widget(self.password)
-        self.add_widget(Button(text='Login', font_size=40))
-        self.add_widget(Button(text='Register', font_size=40))
-    
-    def usr(self):
-        if self.password == "admin" and self.username == "admin":
-            print("Login Successful")
-        else:
-         print("Login Failed")
-
-
-class MyApp(App):
-    
+class MainApp(MDApp):
     def build(self):
-        return loginscreen()
+        self.theme_cls.theme_style = 'Dark'
+        self.theme_cls.primary_palette = 'Blue'
+        return Builder.load_file('login.kv')
+    def logger(self):
+        self.root.ids.welcome_label.text = f'Welcome {self.root.ids.user.text}!'
+
+    def clear(self):
+        self.root.ids.welcome_label.text = "welcome"
+        self.root.ids.user.text = ""
+        self.root.ids.password.text = ""
+
+
+MainApp().run()
 
 
 
-if __name__ == "__main__":
-    MyApp().run()
+
+
 
 
 
