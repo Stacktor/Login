@@ -1,8 +1,8 @@
-Screen:
+HomeScreen:
 
     MDCard:
         size_hint: None, None
-        size: 300, 500
+        size: 100, 200
         pos_hint: {'center_x': .5, 'center_y': .5}
         elevation: 10
         padding: 25
@@ -41,13 +41,13 @@ Screen:
             text: 'Login'
             font_size: 12
             pos_hint: {'center_x': .5}
-            on_press: app.login(), app.after_login()
+            on_press: app.login()
 
         MDRoundFlatButton:
             text: 'Clear'
             font_size: 12
             pos_hint: {'center_x': .5}
-            on_press: app.clear()
+            on_press: app.clear(), app.after_login()
 
         Widget:
             size_hint_y: None

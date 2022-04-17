@@ -9,9 +9,11 @@ win32gui.ShowWindow(hide , win32con.SW_HIDE)
 #hide cmd window end
 
 #Modul importing
+from distutils.command.build import build
 from logging import root
 from tkinter import *
 from tkinter import messagebox
+from turtle import clear
 from typing_extensions import Self
 from urllib.parse import uses_relative
 #Modul importing end
@@ -30,6 +32,8 @@ from kivy.uix.label import Label
 import typing_extensions
 from kivymd.app import MDApp
 from kivy.lang import Builder
+from kivymd.uix.dialog import MDDialog
+from kivymd.uix.button import MDFlatButton, MDRectangleFlatButton
                              
 kivy.require('2.1.0')
 
@@ -40,13 +44,32 @@ class MainApp(MDApp):
         self.theme_cls.theme_style = 'Dark'
         self.theme_cls.primary_palette = 'Blue'
         return Builder.load_file('login.kv')
-    def logger(self):
-        self.root.ids.welcome_label.text = f'Welcome {self.root.ids.user.text}!'
-
+    def login(self):
+        if self.root.ids.user.text == "1" and self.root.ids.password.text == "1":
+            self.root.ids.welcome_label.text = "Welcome " + self.root.ids.user.text
+            self.root.ids.user.text = ""
+            self.root.ids.password.text = ""
+        else:
+            self.root.ids.welcome_label.text = "Wrong username or password"
+            self.root.ids.user.text = ""
+            self.root.ids.password.text = ""
     def clear(self):
         self.root.ids.welcome_label.text = "welcome"
         self.root.ids.user.text = ""
         self.root.ids.password.text = ""
+    def after_login(self):
+        self.theme_cls.theme_style = 'Dark'
+        self.theme_cls.primary_palette = 'Blue'
+        return Builder.unload_file('after_login.kv')
+    
+    def logout(self):
+        self.root.ids.welcome_label.text = "welcome"
+        self.root.ids.user.text = ""
+        self.root.ids.password.text = ""
+        return self.build()
+    
+
+
 
 
 MainApp().run()
