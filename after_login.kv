@@ -1,8 +1,8 @@
-HomeScreen:
+Screen:
 
     MDCard:
         size_hint: None, None
-        size: 100, 200
+        size: 300, 500
         pos_hint: {'center_x': .5, 'center_y': .5}
         elevation: 10
         padding: 25
@@ -11,7 +11,7 @@ HomeScreen:
 
         MDLabel:
             id: welcome_label
-            text: 'Welcome'
+            text: 'lost'
             font_size: 40
             halign: 'center'
             size_hint_y: None
@@ -47,7 +47,7 @@ HomeScreen:
             text: 'Clear'
             font_size: 12
             pos_hint: {'center_x': .5}
-            on_press: app.clear(), app.after_login()
+            on_press: app.clear()
 
         Widget:
             size_hint_y: None
