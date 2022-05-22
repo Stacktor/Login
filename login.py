@@ -50,7 +50,7 @@ class MainApp(MDApp):
     def after_login(self):
         self.theme_cls.theme_style = 'Dark'
         self.theme_cls.primary_palette = 'Blue'
-        Builder.load_file('after_login.kv')
+        return Builder.unload_file('login.kv')
     
     def logout(self):
         self.root.ids.welcome_label.text = "welcome"
