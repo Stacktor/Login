@@ -1,12 +1,13 @@
 
 #hide cmd window
 #disable for debugging in cmd
-'''
+#'''
 import win32gui, win32con
 hide = win32gui.GetForegroundWindow()
 win32gui.ShowWindow(hide , win32con.SW_HIDE)
-'''
+#'''
 #hide cmd window end
+
 
 #Modul importing
 from distutils.command.build import build
@@ -20,15 +21,22 @@ from urllib.parse import uses_relative
 #Modul importing end
 
 
+
 #Kivy code begin
 
 
 import kivy
 from kivymd.app import MDApp
 from kivy.lang import Builder
+from kivymd.uix.button import MDFlatButton
+from kivymd.uix.dialog import MDDialog
 
 
 class MainApp(MDApp):
+
+
+
+
     def build(self):
         self.theme_cls.theme_style = 'Dark'
         self.theme_cls.primary_palette = 'Blue'
@@ -43,6 +51,7 @@ class MainApp(MDApp):
             self.root.ids.welcome_label.text = "Wrong username or password"
             self.root.ids.user.text = ""
             self.root.ids.password.text = ""
+            self.show_alert_dialog()
     def clear(self):
         self.root.ids.welcome_label.text = "welcome"
         self.root.ids.user.text = ""
@@ -57,6 +66,26 @@ class MainApp(MDApp):
         self.root.ids.user.text = ""
         self.root.ids.password.text = ""
         return self.build()
+
+    def show_alert_dialog(self):
+        if not self.dialog:
+            self.dialog = MDDialog(
+                text="Wrong Password!",
+                buttons=[
+                    MDFlatButton(
+                        text="OK",
+                        theme_text_color="Custom",
+                        text_color=[0, 0, 0, 1],
+                        pos_hint={'center_x': 0.5},
+                        on_release=self.dialog.dismiss
+                    )
+                ]
+            )
+            self.dialog.open()
+        else:
+            self.dialog.open()
+            
+
 
 
 
