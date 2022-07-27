@@ -1,12 +1,4 @@
 
-#hide cmd window
-#disable for debugging in cmd
-#'''
-import win32gui, win32con
-hide = win32gui.GetForegroundWindow()
-win32gui.ShowWindow(hide , win32con.SW_HIDE)
-#'''
-#hide cmd window end
 
 
 #Modul importing
@@ -51,7 +43,6 @@ class MainApp(MDApp):
             self.root.ids.welcome_label.text = "Wrong username or password"
             self.root.ids.user.text = ""
             self.root.ids.password.text = ""
-            self.show_alert_dialog()
     def clear(self):
         self.root.ids.welcome_label.text = "welcome"
         self.root.ids.user.text = ""
@@ -84,7 +75,6 @@ class MainApp(MDApp):
             self.dialog.open()
         else:
             self.dialog.open()
-            
 
 
 
