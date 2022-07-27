@@ -22,6 +22,13 @@ from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivymd.uix.button import MDFlatButton
 from kivymd.uix.dialog import MDDialog
+from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.app import App
+
+
+
+class LoginLayout(Screen):
+    pass
 
 
 class MainApp(MDApp):
@@ -30,9 +37,12 @@ class MainApp(MDApp):
 
 
     def build(self):
+        sm=ScreenManager()
+        sm.add_widget(LoginLayout(name='login'))
+        return sm
+
         self.theme_cls.theme_style = 'Dark'
         self.theme_cls.primary_palette = 'Blue'
-        return Builder.load_file('login.kv')
     def login(self):
         if self.root.ids.user.text == "1" and self.root.ids.password.text == "1":
             self.root.ids.welcome_label.text = "Welcome " + self.root.ids.user.text
@@ -43,6 +53,7 @@ class MainApp(MDApp):
             self.root.ids.welcome_label.text = "Wrong username or password"
             self.root.ids.user.text = ""
             self.root.ids.password.text = ""
+            self.manager.current = 'AfterLogin'
     def clear(self):
         self.root.ids.welcome_label.text = "welcome"
         self.root.ids.user.text = ""
@@ -75,10 +86,6 @@ class MainApp(MDApp):
             self.dialog.open()
         else:
             self.dialog.open()
-
-
-
-
 MainApp().run()
 
 
@@ -117,6 +124,8 @@ def copy_button():
 def Hwid():
       if GetUUID == "03C00218-044D-05DB-A406-090700080009":
             return True
+        else:
+            return False
 
 
 def usr():
